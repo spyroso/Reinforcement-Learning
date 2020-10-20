@@ -1,0 +1,137 @@
+\documentclass[a4paper,12pt]{article}
+
+% Packages
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[left = 0.6 in, right = 0.6 in, top = 1 in, bottom = 1 in, headsep = 0.5 in]{geometry}
+\usepackage[normalem]{ulem}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{titling}
+\pgfplotsset{width=8cm,compat=1.9}
+\usepackage{stackengine}
+%\pagenumbering{gobble}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{fancybox}
+
+\hfuzz = 100pt
+
+%%% Horizontal Line Command
+\makeatletter
+  \newcommand*\variableheghtrulefill[1][.4\p@]{%
+    \leavevmode
+    \leaders \hrule \@height #1\relax \hfill
+    \null
+  }
+\makeatother
+%%%
+
+%%% Header & Footer
+\fancyhf{}
+\renewcommand{\footrulewidth}{0.1mm}
+\fancyhead[L]{Bakr Abbas, Matteo Esposito, Spyros Orfanos, Frederic Siino}
+%\fancyhead[C]{Assignment 1}
+\fancyhead[R]{STAT 497-H}
+%\fancyfoot[L]{ID: 40024121, 40025959, 400XXXXX}
+%\fancyfoot[C]{Concordia University
+\fancyfoot[R]{\thepage}
+
+\pagestyle{fancy}
+%%%
+
+% Code formatting
+\def\code#1{\texttt{#1}}
+
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+% Custom settings
+\setlength{\parskip}{0.75em}  % Paragraph spacing
+\setcounter{section}{-1} % Page numbers to start on page 1
+\setlength\parindent{0pt} % Remove indenting from entire file
+\def\layersep{2.5cm}
+
+\title{\textbf{Assignment 1}}
+\author{STAT 497-H | Reinforcement Learning}
+\date{Bakr Abbas (40000333), Matteo Esposito (40024121), Spyros Orfanos (40032280), Frederic Siino (40028348)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{titlingpage}
+  \maketitle
+  \centering
+  \vfill
+  {\large{Concordia University}}\par
+  {\large{February 1st, 2019}}
+\end{titlingpage}
+
+\newpage
+
+\subsection*{Question 1}
+
+\textbf{a)} See \code{main.R} code.
+
+\textbf{b)} See \code{main.R} code.
+
+\textbf{c)}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{figures/q1_avgReward.png}
+  \qquad
+  \includegraphics[width=8cm]{figures/q1_percOptimal.png}
+\end{figure}
+
+From the average reward plot we can observe that initially the greedy action
+($\epsilon = 0$) is the best course of action, however this quickly changes
+and overtime the less greedy options are clearly better as they promote some 
+level of exploration.
+\par
+From the \% optimal action graph we observe a gradual trend towards a value of 
+$1 - \epsilon$ for each curve excluding the $\epsilon = 0$ curve as this is a 
+property of the $\epsilon$-greedy approach.
+
+\subsection*{Question 2}
+
+\textbf{a)} See \code{main.R} code.
+
+\textbf{b)} See \code{main.R} code.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{figures/q2_arm1.png}
+  \qquad
+  \includegraphics[width=8cm]{figures/q2_arm2.png}
+\end{figure}
+
+\textbf{c)}
+% Which method performs better predictions for the action value? Why?
+By observing the graphs of the action value for the two arms, it can be concluded that the 
+exponentially weighted method yields more accurate predictions for the action value. Since 
+the rewards from both arms follow an autoregressive process, the current reward depends on 
+the previous reward. Thus, by using an exponentially weighted step size, we are attributing a 
+progressively decreasing weight to older action value estimates and giving more weight to more 
+recent rewards, which is more suitable for autoregressive models. Since the equally weighted 
+method assigns equal weight to all rewards, the more recent rewards have less of an impact 
+than they should, while the older, less relevant rewards, have the same impact as the more
+ recent rewards on the estimation.
+
+\subsection*{Question 3}
+
+\textbf{a)} See \code{main.R} code.
+
+\textbf{b)} We see that the probability of choosing Arm 3 approaches 1, which is expected 
+since rewards from Arm 3 have the highest mean. Further, the action preference if Arm 2 
+is higher than that of Arm 1, which is also expected since its rewards have a higher mean
+ that those of Arm 2.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{figures/q3.png}
+\end{figure}
+
+\end{document}
